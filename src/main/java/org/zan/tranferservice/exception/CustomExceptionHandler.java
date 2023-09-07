@@ -10,6 +10,7 @@ import org.zan.tranferservice.dto.CommonResponseDTO;
  * Global exception handler for the application.
  * This class handles exceptions of type {@link Exception} and {@link SampleCrudException}.
  * It returns a standardized error response in the form of a {@link CommonResponseDTO}.
+ * @author :Muhammad Fauzan
  */
 @ControllerAdvice
 public class CustomExceptionHandler {

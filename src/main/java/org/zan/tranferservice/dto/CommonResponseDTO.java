@@ -9,6 +9,7 @@ import lombok.Data;
  * and optional data of generic type T.
  *
  * @param <T> The type of data included in the response.
+ * @author :Muhammad Fauzan
  */
 @Data
 @Builder(toBuilder = true)

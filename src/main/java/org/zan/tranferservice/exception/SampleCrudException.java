@@ -22,11 +22,3 @@ public class SampleCrudException extends RuntimeException {
     }
 
 }
-
-
-
-
-
-//log4j2.xml
-//traceId, spanId
-//spring sleuth;

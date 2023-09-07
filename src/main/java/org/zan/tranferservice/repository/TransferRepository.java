@@ -8,5 +8,5 @@ import org.zan.tranferservice.model.Transfer;
  * This repository provides CRUD (Create, Read, Update, Delete) operations for transfers.
  * @author :Muhammad Fauzan
  */
-public interface TransferRepository extends JpaRepository<Transfer,Integer> {
+public interface TransferRepository extends JpaRepository<Transfer,String> {
 }

@@ -1,16 +1,15 @@
 package org.zan.tranferservice.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.zan.tranferservice.dto.TransactionType;
+import org.hibernate.annotations.GenericGenerator;
+import org.zan.tranferservice.type.TransactionType;
 
 /**
  * Represents a financial transfer entity in the application.
- * This entity is used to record financial transactions and is associated with an {@link Order}.
  * It includes information such as the transaction amount, reference ID, transaction type, and associated order.
  *
- * @author :Muhammad Fauzan
+ * @author Muhammad Fauzan
  */
 @Entity
 @Table(name = "t_transfer")
@@ -21,8 +20,9 @@ public class Transfer {
      * The unique identifier for the transfer.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transfer_sequence")
-    private Integer id;
+    @GenericGenerator(strategy = "uuid2", name = "system-uuid")
+    @GeneratedValue(generator = "system-uuid")
+    private String id;
 
     /**
      * The amount of the financial transaction.
@@ -39,20 +39,21 @@ public class Transfer {
      */
     private TransactionType transactionType;
 
+    /**
+     * The order ID associated with the transfer.
+     */
+    private Integer orderId;
 
     /**
-     * The associated order for the transfer.
+     * The company associated with the transfer.
      */
-    @OneToOne
-    @JoinColumn(name = "order_id")
-    @JsonManagedReference
-    private Order order;
+    private String company;
 
     /**
      * Default constructor for the Transfer class.
-     * Initializes the transaction type to {@link TransactionType#REVERSAL}.
+     * Initializes the transaction type to {@link TransactionType#FINANCIAL}.
      */
     public Transfer() {
-        this.transactionType = TransactionType.REVERSAL;
+        this.transactionType = TransactionType.FINANCIAL;
     }
 }

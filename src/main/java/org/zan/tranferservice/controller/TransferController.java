@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.zan.tranferservice.dto.TransferRequestDTO;
 import org.zan.tranferservice.dto.CommonResponseDTO;
 import org.zan.tranferservice.model.Transfer;
 import org.zan.tranferservice.service.TransferService;
@@ -54,7 +53,7 @@ public class TransferController {
      * @return A ResponseEntity containing the transfer, if found.
      */
     @GetMapping("{id}")
-    public ResponseEntity<CommonResponseDTO<Optional<Transfer>>> getById(@PathVariable Integer id){
+    public ResponseEntity<CommonResponseDTO<Optional<Transfer>>> getById(@PathVariable String id){
         Optional<Transfer> transfer = transferService.findById(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
