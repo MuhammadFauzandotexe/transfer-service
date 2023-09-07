@@ -2,6 +2,9 @@ package org.zan.tranferservice.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.zan.tranferservice.type.TransactionType;
 
@@ -14,7 +17,8 @@ import org.zan.tranferservice.type.TransactionType;
 @Entity
 @Table(name = "t_transfer")
 @SequenceGenerator(name = "transfer_sequence", sequenceName = "transfer_sequence")
-@Data
+@Setter
+@Getter
 public class Transfer {
     /**
      * The unique identifier for the transfer.

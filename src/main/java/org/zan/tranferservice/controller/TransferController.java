@@ -2,6 +2,7 @@ package org.zan.tranferservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,9 @@ import java.util.Optional;
  *
  * @author Muhammad Fauzan
  */
-
 @RestController
 @RequestMapping("/api/v1/transfer")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class TransferController {
     private final TransferService transferService;

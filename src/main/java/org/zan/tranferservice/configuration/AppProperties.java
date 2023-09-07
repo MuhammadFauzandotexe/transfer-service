@@ -1,6 +1,7 @@
 package org.zan.tranferservice.configuration;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -9,7 +10,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Muhammad Fauzan
  */
 @ConfigurationProperties(prefix = "app.config")
-@Data
+@Setter
+@Getter
 public class AppProperties {
     private String company;
     private String client;

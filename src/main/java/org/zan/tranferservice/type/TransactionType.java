@@ -2,6 +2,7 @@ package org.zan.tranferservice.type;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * This enum represents transaction types used in the transfer service.
  * It defines two transaction types: REVERSAL and FINANCIAL.

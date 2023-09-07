@@ -11,7 +11,8 @@ import java.util.List;
  *
  * @author :Muhammad Fauzan
  */
-@Data
+@Setter
+@Getter
 public class ResponseDataDTO {
     /**
      * The HTTP status code of the response.

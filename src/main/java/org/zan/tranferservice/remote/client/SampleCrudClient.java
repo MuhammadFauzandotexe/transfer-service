@@ -16,6 +16,7 @@ import org.zan.tranferservice.remote.dto.ResponseDataDTO;
  */
 @FeignClient(name = "${app.config.client}", url = Constant.SAMPLE_CLIENT_BASE_URL)
 public interface SampleCrudClient {
+
     /**
      * Retrieves order information by its unique identifier.
      *
