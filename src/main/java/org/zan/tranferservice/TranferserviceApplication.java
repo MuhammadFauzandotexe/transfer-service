@@ -10,7 +10,6 @@ import org.zan.tranferservice.configuration.AppProperties;
 @EnableFeignClients
 @EnableConfigurationProperties(AppProperties.class)
 public class TranferserviceApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(TranferserviceApplication.class, args);
 	}

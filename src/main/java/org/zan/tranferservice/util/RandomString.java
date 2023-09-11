@@ -10,7 +10,6 @@ public class RandomString {
 
     /**
      * Generates a unique reference ID as a random string.
-     *
      * @return A unique reference ID as a string.
      */
     public static String generateUniqueReferenceId() {

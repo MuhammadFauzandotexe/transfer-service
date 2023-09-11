@@ -1,9 +1,9 @@
 package org.zan.tranferservice.service.impl;
 
-import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.zan.tranferservice.configuration.AppProperties;
@@ -16,6 +16,7 @@ import org.zan.tranferservice.service.TransferService;
 import org.zan.tranferservice.util.RandomString;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * This class provides the implementation of the TransferService interface.
  * It handles the creation of transfers, retrieval of transfer data, and finding transfers by ID.
@@ -29,15 +30,17 @@ public class TransferServiceImpl implements TransferService {
     private final TransferRepository transferRepository;
     private final SampleCrudClient sampleCrudClient;
     private final AppProperties appProperties;
-
     /**
      * {@inheritDoc}
      * @throws SampleCrudException
      */
     @Transactional(rollbackOn = Exception.class)
     @Override
-    public Transfer create(Integer id) {
+    public Transfer create(String id) {
         log.info("start get order with ID: " + id);
+        log.info("New transaction message!");
+        log.info("New payment message!");
+        log.info("New user message!");
         try {
             ResponseDataDTO responseData = sampleCrudClient.getOrderById(id);
             ResponseDataDTO.Data data = responseData.getData();
@@ -61,6 +64,10 @@ public class TransferServiceImpl implements TransferService {
      */
     @Override
     public List<Transfer> getAll() {
+        log.info("start get order with ID: ");
+        log.info( "New transaction message!");
+        log.info( "New payment message!");
+        log.info( "New user message!");
         log.info("start get all data transfer");
         List<Transfer> transfers = transferRepository.findAll();
         log.info("success get all data transfer");

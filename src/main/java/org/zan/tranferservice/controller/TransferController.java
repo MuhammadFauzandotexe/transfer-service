@@ -22,7 +22,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/transfer")
 @RequiredArgsConstructor
-@Slf4j
 public class TransferController {
     private final TransferService transferService;
 
@@ -33,7 +32,7 @@ public class TransferController {
      * @throws JsonProcessingException if there is an issue with JSON processing.
      */
     @PostMapping("/{id}")
-    public ResponseEntity<CommonResponseDTO<Transfer>> transfer(@PathVariable Integer id) throws JsonProcessingException {
+    public ResponseEntity<CommonResponseDTO<Transfer>> transfer(@PathVariable String id) throws JsonProcessingException {
         Transfer transfer = transferService.create(id);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

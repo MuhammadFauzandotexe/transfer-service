@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO">
-    <Properties>
-        <Property name="traceId">${mdc:traceId}</Property>
-        <Property name="spanId">${mdc:spanId}</Property>
-    </Properties>
+<Configuration status="INFO" monitorInterval="30">
 
-    <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - traceId=%X{traceId}, spanId=%X{spanId} - %msg%n"/>
-        </Console>
-    </Appenders>
+  <Properties>
+    <Property name="LOG_PATTERN">[%-5level] %d{yyyy-MM-dd'T'HH:mm:ss.SSS} [%X{traceId}] [%X{spanId}] %c{1} - %msg%n</Property>
+    <Property name="LOG_DIR">C:\Dev\tranferservice\src\main\resources\logs</Property>
+  </Properties>
 
-    <Loggers>
-        <Root level="info">
-            <AppenderRef ref="Console"/>
-        </Root>
-    </Loggers>
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+    </Console>
+    <RollingFile
+            name="transactionLogs"
+            fileName="${LOG_DIR}/transactions.log"
+            filePattern="${LOG_DIR}/transactions.%d{dd-MMM}.log.gz"
+            ignoreExceptions="false">
+<!--      <MarkerFilter marker="TRANSACTION" onMatch="ACCEPT" onMismatch="DENY"/>-->
+      <PatternLayout>
+        <Pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSS} [%X{traceId}] [%X{spanId}] %c{1} - %msg%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <SizeBasedTriggeringPolicy size ="50 MB" />
+      </Policies>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Root level="INFO">
+      <AppenderRef ref="console"/>
+      <AppenderRef ref="transactionLogs"/>
+    </Root>
+  </Loggers>
 </Configuration>

@@ -1,6 +1,5 @@
 package org.zan.tranferservice.remote.dto;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,7 +37,7 @@ public class ResponseDataDTO {
         /**
          * The unique identifier for the data.
          */
-        private Integer id;
+        private String id;
 
         /**
          * The order number associated with the data.
@@ -64,7 +63,7 @@ public class ResponseDataDTO {
             /**
              * The unique identifier for the item.
              */
-            private Integer id;
+            private String id;
 
             /**
              * The name of the item.

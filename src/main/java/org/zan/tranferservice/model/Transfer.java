@@ -1,12 +1,13 @@
 package org.zan.tranferservice.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.zan.tranferservice.type.TransactionType;
+
+import java.util.UUID;
 
 /**
  * Represents a financial transfer entity in the application.
@@ -26,7 +27,7 @@ public class Transfer {
     @Id
     @GenericGenerator(strategy = "uuid2", name = "system-uuid")
     @GeneratedValue(generator = "system-uuid")
-    private String id;
+    private UUID id;
 
     /**
      * The amount of the financial transaction.
@@ -46,7 +47,7 @@ public class Transfer {
     /**
      * The order ID associated with the transfer.
      */
-    private Integer orderId;
+    private String orderId;
 
     /**
      * The company associated with the transfer.

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: TransferService
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/satu
@@ -8,17 +10,13 @@ spring:
     properties:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-      ddl-auto: create-drop
-    show-sql: true
+      ddl-auto: update
+    show-sql: false
 server:
   error:
     include-stacktrace: never
   port: 8081
-
 app:
   config:
     company: OBS Financial Solutions Pte. Ltd.
     client: SampleCrudClient
-
-

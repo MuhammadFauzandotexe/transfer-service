@@ -21,7 +21,7 @@ public interface TransferService {
      * @return The created Transfer object.
      * @throws SampleCrudException if the order is not found or an unexpected error occurs.
      */
-    Transfer create(Integer id) throws JsonProcessingException;
+    Transfer create(String id) throws JsonProcessingException;
 
     /**
      * Retrieves all transfer data.

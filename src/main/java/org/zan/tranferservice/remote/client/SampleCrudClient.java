@@ -4,6 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.zan.tranferservice.configuration.Constant;
+import org.zan.tranferservice.configuration.interceptor.FeignConfiguration;
 import org.zan.tranferservice.remote.dto.ResponseDataDTO;
 
 /**
@@ -14,7 +15,8 @@ import org.zan.tranferservice.remote.dto.ResponseDataDTO;
  *
  * @author :Muhammad Fauzan
  */
-@FeignClient(name = "${app.config.client}", url = Constant.SAMPLE_CLIENT_BASE_URL)
+//@Service
+@FeignClient(name = "SampleCrudClient", url = Constant.SAMPLE_CLIENT_BASE_URL,configuration = FeignConfiguration.class)
 public interface SampleCrudClient {
 
     /**
@@ -24,6 +26,6 @@ public interface SampleCrudClient {
      * @return A {@link ResponseDataDTO} containing the order data.
      */
     @GetMapping("/order/{id}")
-    ResponseDataDTO getOrderById(@PathVariable("id") Integer id);
+    ResponseDataDTO getOrderById(@PathVariable("id") String id);
 }
 
