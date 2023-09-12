@@ -1,22 +1,53 @@
+server:
+  error:
+    include-stacktrace: never
+  port: ${server-port}
+#  port: 8081
 spring:
   application:
     name: TransferService
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/satu
-    username: postgres
-    password: HtkBbx51087#
+#    url: jdbc:postgresql://localhost:5432/satu
+#    username: postgres
+#    password: HtkBbx51087#
+
+    url: ${db-url}
+    username: ${db-username}
+    password: ${db-password}
   jpa:
     properties:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: false
-server:
-  error:
-    include-stacktrace: never
-  port: 8081
 app:
   config:
     company: OBS Financial Solutions Pte. Ltd.
     client: SampleCrudClient
+sample:
+  client:
+    base:
+      url: ${client-base-url}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  endpoint:
+    loggers:
+      enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+  metrics:
+    tags:
+      application: springboot-3
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

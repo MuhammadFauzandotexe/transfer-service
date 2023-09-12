@@ -1,6 +1,6 @@
 package org.zan.tranferservice.service.impl;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.*;
@@ -38,17 +38,20 @@ public class TransferServiceImpl implements TransferService {
     @Override
     public Transfer create(String id) {
         log.info("start get order with ID: " + id);
-        log.info("New transaction message!");
-        log.info("New payment message!");
-        log.info("New user message!");
+        int amount = 0;
         try {
             ResponseDataDTO responseData = sampleCrudClient.getOrderById(id);
             ResponseDataDTO.Data data = responseData.getData();
+            for (ResponseDataDTO.Data.OrderDetail orderDetail: data.getOrderDetails()){
+                for (ResponseDataDTO.Data.OrderDetail.Item item: orderDetail.getItems()){
+                    amount = amount+(item.getPrice()*orderDetail.getQuantity());
+                }
+            }
             Transfer transfer = new Transfer();
             transfer.setReferenceId(RandomString.generateUniqueReferenceId());
-            transfer.setAmount(data.getItems().stream().findFirst().get().getPrice() * data.getQuantity());
+            transfer.setAmount(amount);
             transfer.setCompany(appProperties.getCompany());
-            transfer.setOrderId(data.getId());
+            transfer.setOrderId(data.getId().toString());
             Transfer transferSave = transferRepository.saveAndFlush(transfer);
             log.info("success create transfer with ID: " + transferSave.getId());
             return transferSave;
@@ -64,10 +67,6 @@ public class TransferServiceImpl implements TransferService {
      */
     @Override
     public List<Transfer> getAll() {
-        log.info("start get order with ID: ");
-        log.info( "New transaction message!");
-        log.info( "New payment message!");
-        log.info( "New user message!");
         log.info("start get all data transfer");
         List<Transfer> transfers = transferRepository.findAll();
         log.info("success get all data transfer");
@@ -78,14 +77,9 @@ public class TransferServiceImpl implements TransferService {
      * {@inheritDoc}
      */
     @Override
-    public Optional<Transfer> findById(String id) {
+    public Transfer findById(String id) {
         log.info("start get transfer with ID: " + id);
-        Optional<Transfer> transferOptional = transferRepository.findById(id);
-        if (transferOptional.isEmpty()) {
-            throw new SampleCrudException("transfer not with ID: " + id, HttpStatus.NOT_FOUND);
-        }
-        log.info("success get transfer with ID: " + id);
-        return transferOptional;
+        return transferRepository.findById(id).orElseThrow(() -> new SampleCrudException("transfer not with ID: " + id, HttpStatus.NOT_FOUND));
     }
 }
 

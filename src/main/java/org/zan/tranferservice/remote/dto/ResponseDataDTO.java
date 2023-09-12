@@ -1,79 +1,53 @@
 package org.zan.tranferservice.remote.dto;
-
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.UUID;
+
 /**
- * This class represents a response data transfer object (DTO) for remote service interactions.
- * It contains information such as the HTTP status code, a message, and a nested "Data" object.
+ * Data Transfer Object (DTO) representing a response data structure.
+ * This class is used to encapsulate response data sent from the remote service.
  *
  * @author :Muhammad Fauzan
  */
 @Setter
 @Getter
 public class ResponseDataDTO {
-    /**
-     * The HTTP status code of the response.
-     */
-    private int statusCode;
-
-    /**
-     * A message associated with the response.
-     */
+    private String statusCode;
     private String message;
-
-    /**
-     * The nested "Data" object containing additional response data.
-     */
     private Data data;
 
     /**
-     * This class represents the nested "Data" object within the response DTO.
+     * Nested DTO class representing the data part of the response.
      */
-    @Getter
     @Setter
+    @Getter
     public static class Data {
-        /**
-         * The unique identifier for the data.
-         */
-        private String id;
-
-        /**
-         * The order number associated with the data.
-         */
+        private UUID id;
         private String orderNo;
+        private List<OrderDetail> orderDetails;
 
         /**
-         * The quantity of items in the data.
+         * Nested DTO class representing order details.
          */
-        private Integer quantity;
-
-        /**
-         * A list of "Item" objects representing individual items within the data.
-         */
-        private List<Item> items;
-
-        /**
-         * This class represents an individual item within the "Data" object.
-         */
-        @Getter
         @Setter
-        public static class Item {
-            /**
-             * The unique identifier for the item.
-             */
-            private String id;
+        @Getter
+        public static class OrderDetail {
+            private UUID id;
+            private Integer quantity;
+            private List<Item> items;
 
             /**
-             * The name of the item.
+             * Nested DTO class representing items within an order detail.
              */
-            private String name;
-
-            /**
-             * The price of the item.
-             */
-            private Integer price;
+            @Setter
+            @Getter
+            public static class Item {
+                private UUID id;
+                private String name;
+                private Integer price;
+            }
         }
     }
 }

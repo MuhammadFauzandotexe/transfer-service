@@ -37,6 +37,6 @@ public interface TransferService {
      * @return An Optional containing the found Transfer object, or an empty Optional if not found.
      * @throws SampleCrudException if the transfer is not found.
      */
-    Optional<Transfer> findById(String id);
+    Transfer findById(String id);
 
 }

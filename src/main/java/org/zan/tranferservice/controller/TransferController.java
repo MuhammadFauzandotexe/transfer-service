@@ -52,12 +52,12 @@ public class TransferController {
      * @return A ResponseEntity containing the transfer, if found.
      */
     @GetMapping("{id}")
-    public ResponseEntity<CommonResponseDTO<Optional<Transfer>>> getById(@PathVariable String id){
-        Optional<Transfer> transfer = transferService.findById(id);
+    public ResponseEntity<CommonResponseDTO<Transfer>> getById(@PathVariable String id){
+        Transfer transfer = transferService.findById(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(
-                        CommonResponseDTO.<Optional<Transfer>>builder()
+                        CommonResponseDTO.<Transfer>builder()
                                 .statusCode(HttpStatus.OK.value())
                                 .message("success")
                                 .data(transfer)

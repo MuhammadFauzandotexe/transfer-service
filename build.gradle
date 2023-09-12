@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.7.15'
+	id 'org.springframework.boot' version '3.1.3'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
@@ -23,28 +23,27 @@ repositories {
 
 ext {
 	dependencies {
-		implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
-		implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
-		implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+		//Dependencies for tracing
+		implementation "io.micrometer:micrometer-registry-prometheus"
+
+		//Core dependencies to display log trace id on application
+		implementation "org.springframework.boot:spring-boot-starter-actuator"
+		implementation "io.micrometer:micrometer-tracing-bridge-brave"
 		implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+		implementation 'io.github.openfeign:feign-micrometer' //just for client side
+		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
-
-
-
+		//Basic dependencies
 		implementation 'org.springframework.boot:spring-boot-starter'
 		annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-		implementation 'com.fasterxml.jackson.core:jackson-databind'
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 		implementation 'org.springframework.boot:spring-boot-starter-web'
-		implementation 'org.springframework.boot:spring-boot-starter'
 		compileOnly 'org.projectlombok:lombok'
-		runtimeOnly 'com.h2database:h2'
 		runtimeOnly 'org.postgresql:postgresql'
 		annotationProcessor 'org.projectlombok:lombok'
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	}
-	set('springCloudVersion', "2021.0.3")
+	set('springCloudVersion', "2022.0.3")
 }
 
 dependencyManagement {

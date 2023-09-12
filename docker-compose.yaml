@@ -1,0 +1,30 @@
+services:
+  db2:
+    ports:
+      - 5433:5432
+    container_name: transfer_service_db
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=HtkBbx51087#
+    volumes:
+      - "C:/Back-Up/TransferServiceDB:/var/lib/postgresql/data"
+    restart: always
+  backend:
+    volumes:
+      - "C:/Back-Up/App/log/TransferService:/src/main/resources/logs"
+    build: .
+    container_name: transfer_service_container
+    ports:
+      - 8081:8081
+    environment:
+      client-base-url: http://172.22.0.2:8080/api/v1
+      db-url: jdbc:postgresql://db2:5432/postgres
+      db-username: postgres
+      db-password: HtkBbx51087#
+      server-port: 8081
+    depends_on:
+      - db2
+    restart: always
+
